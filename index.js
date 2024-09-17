@@ -1,7 +1,7 @@
 const getTasksFromLocalStorage = () =>{
     const localTasks = JSON.parse(window.localStorage.getItem('tasks'))
     return localTasks ? localTasks : []
-}
+} 
 
 const setTasksInLocalStorage = (tasks) =>{
     window.localStorage.setItem('tasks',JSON.stringify(tasks))
@@ -136,4 +136,10 @@ window.onload = function(){
         const checkbox = getCheckboxInput(task)
         createTaskListItem(task,checkbox)
     })
+}
+
+const tasksCounter = ()=>{
+    const tasks = getTasksFromLocalStorage()
+    const tasksCounter = document.getElementById('tasks-counter')
+    tasksCounter.innerHTML=`${'s'}/${tasks.length} concluídas`
 }

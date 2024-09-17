@@ -140,9 +140,14 @@ main{
     }
 }
 
+#tasks-counter{
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
 footer{
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
