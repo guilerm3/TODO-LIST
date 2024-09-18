@@ -15,6 +15,7 @@ const removeTask = (taskId)=>{
     document
     .getElementById('todo-list')
     .removeChild(document.getElementById(taskId))
+    tasksCounter()
 }
 
 const removeDoneTasks = ()=>{
@@ -31,6 +32,7 @@ const removeDoneTasks = ()=>{
         .getElementById('todo-list')
         .removeChild(document.getElementById(tasksToRemove))
     })
+    tasksCounter()
 }
 
 const createTaskListItem = (task,checkbox) =>{
@@ -60,8 +62,9 @@ const onCheckboxClick = (event) =>{
         ? {...task, checked:event.target.checked}
         : task
     })
-
+    
     setTasksInLocalStorage(updatedTasks)
+    tasksCounter()
 }
 
 const getCheckboxInput = ({id,description, checked}) =>{
@@ -124,6 +127,8 @@ const createTask = async (event) =>{
 
     document.getElementById('description').value = ''
     document.getElementById('save-task').removeAttribute('disabled')
+
+    tasksCounter()
 }
 
 window.onload = function(){
@@ -136,10 +141,16 @@ window.onload = function(){
         const checkbox = getCheckboxInput(task)
         createTaskListItem(task,checkbox)
     })
+
+    tasksCounter()
 }
 
 const tasksCounter = ()=>{
     const tasks = getTasksFromLocalStorage()
     const tasksCounter = document.getElementById('tasks-counter')
-    tasksCounter.innerHTML=`${'s'}/${tasks.length} concluídas`
+    let counter = 0
+    tasks.forEach((tasks)=>{
+        if (tasks.checked == true)counter ++  
+    })
+    tasksCounter.innerHTML=`${counter}/${tasks.length} concluídas`
 }
